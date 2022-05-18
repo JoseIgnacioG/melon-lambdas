@@ -17,27 +17,21 @@ public class Main {
             System.out.println(melons.get(i).toString());
         }
 
-        List<Melon> bailan = filterByType(melons, "gac");
+        List<Melon> bailan = Filters.filterByType(melons, "gac");
 
         System.out.println("Lista filtrada:");
         for (Melon melon : bailan) System.out.println(melon.toString());
+
+        List<Melon> found = Filters.filterByWeight(melons, 1200);
+
+        System.out.println("Lista filtrada:");
+        for (Melon melon : found) System.out.println(melon.toString());
+
+        List<Melon> found2 = Filters.filterByWeightHigherOrSmaller(melons, 3400, false);
+
+        System.out.println("Lista filtrada:");
+        for (Melon melon : found2) System.out.println(melon.toString());
     }
 
-    private static List<Melon> filterByType(List<Melon> melons, String type) {
-        if(melons == null || type == null)
-            throw new IllegalArgumentException("Melons/type cannot nbe null");
 
-        if(melons.isEmpty()){
-            return melons;
-        }
-
-        List<Melon> result = new ArrayList<>();
-        for(Melon melon : melons){
-          if(melon !=null && type.equalsIgnoreCase(melon.getType())){
-              result.add(melon);
-          }
-        }
-
-        return result;
-    }
 }
