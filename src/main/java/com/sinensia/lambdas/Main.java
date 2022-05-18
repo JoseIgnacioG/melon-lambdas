@@ -17,20 +17,57 @@ public class Main {
             System.out.println(melons.get(i).toString());
         }
 
-        List<Melon> bailan = Filters.filterByType(melons, "gac");
-
-        System.out.println("Lista filtrada:");
-        for (Melon melon : bailan) System.out.println(melon.toString());
+        List<Melon> bailan = Filters.filterByType(melons, "Bailan");
+        System.out.println("Lista filtrada: ");
+        for(Melon m: bailan) {
+            System.out.println(m);
+        }
 
         List<Melon> found = Filters.filterByWeight(melons, 1200);
+        System.out.println("Lista melones de 1200g: ");
+        for(Melon m: found) {
+            System.out.println(m);
+        }
 
-        System.out.println("Lista filtrada:");
-        for (Melon melon : found) System.out.println(melon.toString());
+        List<Melon> foundMayor = Filters.filterByWeightHigherOrSmaller(melons, 3500, true);
+        System.out.println("Lista melones mayores de 3500g:");
+        for (Melon melon : foundMayor)
+            System.out.println(melon.toString());
 
-        List<Melon> found2 = Filters.filterByWeightHigherOrSmaller(melons, 3400, false);
+        List<Melon> foundMenor = Filters.filterByWeightHigherOrSmaller(melons, 3500, false);
+        System.out.println("Lista melones menores de 3500g:");
+        for (Melon melon : foundMenor)
+            System.out.println(melon.toString());
 
-        System.out.println("Lista filtrada:");
-        for (Melon melon : found2) System.out.println(melon.toString());
+        System.out.println("Lista melones gac: ");
+        List<Melon> gac = Filters.filterMelons(melons, new GacMelonPredicate());
+        for(Melon m: gac) {
+            System.out.println(m);
+        }
+
+        System.out.println("Lista melones pesados: ");
+        List<Melon> heavy = Filters.filterMelons(melons, new HeavyMelonPredicate());
+        for(Melon m: heavy) {
+            System.out.println(m);
+        }
+
+        System.out.println("Lista melones super-pesados: ");
+        List<Melon> superheavy = Filters.filterMelons(melons, melon -> melon!=null && melon.getWeight()>=6000);
+        for(Melon m: superheavy) {
+            System.out.println(m);
+        }
+
+        System.out.println("Lista melones europeos: ");
+        for(Melon m:  Filters.filterMelons(melons, melon -> melon!=null && melon.getOrigin().equalsIgnoreCase("Europe"))) {
+            System.out.println(m);
+        }
+
+        System.out.println("Lista sandias: ");
+        List<Melon> watermelons = Filters.filter(melons, (Melon m)->m.getType().equalsIgnoreCase("watermelon"));
+        for(Melon m: watermelons) {
+            System.out.println(m);
+        }
+
     }
 
 
